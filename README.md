@@ -136,3 +136,34 @@ Users can then install the  *beta* version by appending `@beta` to the install c
 ```
 sudo npm install -g homebridge-example-plugin@beta
 ```
+
+## Plugin Development
+
+The https://developers.homebridge.io website contains the Homebridge API reference, available service and characteristic types, and plugin examples.
+
+For a great introduction to writing plugins with some example code, check out [Frédéric Barthelet's excellent blog post](https://blog.theodo.com/2017/08/make-siri-perfect-home-companion-devices-not-supported-apple-homekit/).
+
+There are many existing plugins you can study; you might start with the [Homebridge Example Plugins](https://github.com/homebridge/homebridge-examples). The [Homebridge Plugin Template](https://github.com/homebridge/homebridge-plugin-template) project also provides a base you can use to create your own *platform* plugin.
+
+When writing your plugin, you'll want Homebridge to load it from your development directory instead of publishing it to `npm` each time. Run this command inside your plugin project folder so your global install of Homebridge can discover it:
+
+
+```shell
+npm link
+```
+
+*You can undo this using the `npm unlink` command.*
+
+Then start Homebridge in debug mode:
+
+```shell
+homebridge -D
+```
+
+This will start up Homebridge and load your in-development plugin. Note that you can also direct Homebridge to load your configuration from somewhere besides the default `~/.homebridge`, for example:
+
+```shell
+homebridge -D -U ~/.homebridge-dev
+```
+
+This is very useful when you are already using your development machine to host a "real" Homebridge instance (with all your accessories) that you don't want to disturb.
